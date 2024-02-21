@@ -1,0 +1,327 @@
+import java.util.Scanner;
+
+
+class Node
+{
+
+  int data;
+
+  Node pre;
+
+  Node next;
+
+
+}
+
+public class Main
+{
+
+  static Node head;
+
+  static Node rev;
+
+  static Node temp;
+
+  static Scanner sc = new Scanner (System.in);
+
+  public static void main (String arg[])
+  {
+
+	System.out.println ("Enter number of Elements");
+
+	int n = sc.nextInt ();
+
+	  create (n);
+
+
+	while (true)
+	  {
+
+		System.out.println
+		  ("\n 1.display\n 3.insert anywhere\n 4.insert first\n 5.Insert last\n 6.deletebegin\n 7.deletelast\n 8.delete\n 9.display\n 10.exit");
+
+		int ch = sc.nextInt ();
+
+		switch (ch)
+
+		  {
+
+		  case 1:
+
+			System.out.println ("Display\n");
+
+			display ();
+
+			break;
+
+			case 3:System.out.println ("Insert Anywhere\n");
+
+			insert ();
+
+			display ();
+
+			break;
+
+			case 4:System.out.println ("Insert Begin\n");
+
+			insertbegin ();
+
+			display ();
+
+			break;
+
+			case 5:System.out.println ("Insert Last\n");
+
+			insertlast ();
+
+			display ();
+
+			break;
+
+			case 6:System.out.println ("Delete Last\n");
+
+			deletebegin ();
+
+			display ();
+
+			break;
+
+			case 7:System.out.println ("Delete Last\n");
+
+			deletelast ();
+
+			display ();
+
+			break;
+
+			case 8:System.out.println ("Delete\n");
+
+			delete ();
+
+			display ();
+
+			break;
+
+			case 9:System.out.println ("Display\n");
+
+			display ();
+
+			break;
+
+			case 10:display ();
+
+			System.exit (0);
+
+		  }
+
+	  }
+
+
+  }
+
+  static void create (int n)
+  {
+
+	System.out.println ("Enter the Element up to" + n);
+
+	head = new Node ();
+
+	head.data = sc.nextInt ();
+
+	head.next = null;
+
+
+	Node temp = head;
+
+
+	for (int i = 2; i <= n; i++)
+	  {
+
+		Node newnode = new Node ();
+
+
+		newnode.data = sc.nextInt ();
+
+		newnode.next = null;
+
+		temp.next = newnode;
+
+		temp = temp.next;
+
+	  }
+	rev = temp;
+
+	System.out.println (rev.data);
+
+  }
+  static void display ()
+  {
+	Node temp = head;
+
+	while (temp != null)
+
+	  {
+
+		System.out.print (temp.data + " ");
+
+		temp = temp.next;
+
+	  }
+	System.out.println ();
+
+  }
+
+
+  static void insert ()
+  {
+
+	Node newnode = new Node ();
+
+	Node temp = head;
+
+	int p = sc.nextInt ();
+
+	int c = 0;
+
+	if (p == 1)
+	  {
+
+		insertbegin ();
+
+	  }
+	else
+	  {
+
+		for (int i = 1; i <= p - 2; i++)
+		  {
+
+			temp = temp.next;
+
+			c++;
+
+		  }
+		if (c >= p - 1 || temp == null)
+		  {
+
+			System.out.println ("invalid");
+
+		  }
+
+		else
+		  {
+
+			newnode.data = sc.nextInt ();
+
+			newnode.next = temp.next;
+
+
+			temp.next = newnode;
+
+
+		  }
+		System.out.println ();
+
+	  }
+
+  }
+
+  static void insertbegin ()
+  {
+
+	Node newnode = new Node ();
+
+	newnode.data = sc.nextInt ();
+
+	newnode.next = head;
+
+	head = newnode;
+
+
+  }
+  static void insertlast ()
+  {
+
+	Node newnode = new Node ();
+
+	Node rev = head;
+
+	newnode.data = sc.nextInt ();
+
+	while (rev.next != null)
+
+	  {
+
+		rev = rev.next;
+
+	  }
+
+
+	rev.next = newnode;
+
+	rev = newnode;
+
+  }
+
+  static void deletebegin ()
+  {
+
+	head = head.next;
+
+  }
+  static void deletelast ()
+  {
+
+	Node rev = head;
+
+
+	while (rev.next != null)
+
+	  {
+
+		rev = rev.next;
+
+	  }
+
+	rev.next = null;
+
+
+  }
+
+  static void delete ()
+  {
+
+	Node temp = head;
+
+	int p = sc.nextInt ();
+
+	int c = 0;
+
+	for (int i = 1; i <= p - 2; i++)
+	  {
+
+		temp = temp.next;
+
+		c++;
+
+	} if (c >= p - 1 || temp.next == null)
+	  {
+
+		System.out.println ("Invalid");
+
+	  }
+
+	else
+	  {
+
+		temp.next.next.pre = temp;
+
+		temp.next = temp.next.next;
+
+
+	  }
+
+
+  }
+
+
+}
